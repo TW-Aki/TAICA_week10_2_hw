@@ -1,0 +1,1395 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>美台 AI 供應鏈一二階傳導與 2026–2029 實質基本面影響深度剖析 | LLM Wiki 簡報 (Stage 3 1:1 終極版)</title>
+  <style>
+    :root {
+      --bg-dark: #070b14;
+      --bg-card: #0f172a;
+      --bg-card-hover: #16223d;
+      --bg-panel: #111c33;
+      --border: #1e293b;
+      --border-highlight: #38bdf8;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --accent-cyan: #38bdf8;
+      --accent-blue: #3b82f6;
+      --accent-purple: #a855f7;
+      --bull-green: #10b981;
+      --bull-bg: rgba(16, 185, 129, 0.14);
+      --bear-red: #f43f5e;
+      --bear-bg: rgba(244, 63, 94, 0.14);
+      --watch-amber: #f59e0b;
+      --watch-bg: rgba(245, 158, 11, 0.14);
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft JhengHei", "PingFang TC", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      overflow: hidden;
+      height: 100vh;
+      width: 100vw;
+      display: flex;
+      flex-direction: column;
+      user-select: none;
+    }
+
+    /* Top Bar */
+    .topbar {
+      height: 54px;
+      background: rgba(15, 23, 42, 0.94);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      z-index: 20;
+      flex-shrink: 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 0.92rem;
+      letter-spacing: 0.02em;
+    }
+
+    .brand-badge {
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+      color: #fff;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.73rem;
+      font-weight: 800;
+    }
+
+    .loop-badge {
+      background: rgba(16, 185, 129, 0.16);
+      border: 1px solid rgba(16, 185, 129, 0.45);
+      color: #34d399;
+      padding: 3px 8px;
+      border-radius: 5px;
+      font-size: 0.72rem;
+      font-weight: 700;
+    }
+
+    .slide-dots {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .dot-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 5px 11px;
+      border-radius: 6px;
+      font-size: 0.76rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .dot-btn:hover {
+      border-color: var(--accent-cyan);
+      color: var(--text-main);
+    }
+
+    .dot-btn.active {
+      background: rgba(56, 189, 248, 0.16);
+      border-color: var(--accent-cyan);
+      color: var(--accent-cyan);
+      font-weight: 700;
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      transition: all 0.2s;
+    }
+
+    .nav-btn:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--accent-cyan);
+    }
+
+    /* Slide Viewport (16:9 Scaled Container) */
+    .viewport {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px 26px;
+      background: radial-gradient(circle at 85% 15%, rgba(56, 189, 248, 0.08), transparent 40%),
+                  radial-gradient(circle at 15% 85%, rgba(168, 85, 247, 0.08), transparent 40%);
+    }
+
+    .slide {
+      display: none;
+      width: 100%;
+      max-width: 1540px;
+      height: 100%;
+      max-height: 850px;
+      background: rgba(15, 23, 42, 0.82);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px 36px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.55);
+      flex-direction: column;
+      justify-content: space-between;
+      overflow-y: auto;
+      animation: fadeIn 0.25s ease-out;
+    }
+
+    .slide.active {
+      display: flex;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Slide Header */
+    .slide-header {
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 14px;
+      margin-bottom: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-shrink: 0;
+      gap: 16px;
+    }
+
+    .slide-kicker {
+      color: var(--accent-cyan);
+      font-size: 0.76rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 5px;
+    }
+
+    .slide-title {
+      font-size: 1.62rem;
+      font-weight: 800;
+      line-height: 1.25;
+      background: linear-gradient(90deg, #ffffff, #cbd5e1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .wiki-source-pill {
+      background: rgba(59, 130, 246, 0.12);
+      border: 1px solid rgba(59, 130, 246, 0.35);
+      color: #93c5fd;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 0.74rem;
+      font-family: monospace;
+      white-space: nowrap;
+    }
+
+    /* Utility Grids & Cards */
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1.12fr 1fr;
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 18px;
+      transition: all 0.2s;
+    }
+
+    .card:hover {
+      border-color: rgba(56, 189, 248, 0.45);
+    }
+
+    .kpi-value {
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: var(--accent-cyan);
+      margin: 5px 0;
+    }
+
+    .kpi-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .kpi-sub {
+      font-size: 0.77rem;
+      color: #cbd5e1;
+      margin-top: 6px;
+      line-height: 1.48;
+    }
+
+    /* Tags & Evidence Badges (Gate 1 Strict Tiering) */
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      margin-right: 4px;
+    }
+
+    .tag-bull { background: var(--bull-bg); color: var(--bull-green); border: 1px solid rgba(16, 185, 129, 0.3); }
+    .tag-bear { background: var(--bear-bg); color: var(--bear-red); border: 1px solid rgba(244, 63, 94, 0.3); }
+    .tag-watch { background: var(--watch-bg); color: var(--watch-amber); border: 1px solid rgba(245, 158, 11, 0.3); }
+    .tag-time { background: rgba(168, 85, 247, 0.14); color: #d8b4fe; border: 1px solid rgba(168, 85, 247, 0.3); }
+
+    .ev-fact {
+      display: inline-block;
+      background: rgba(16, 185, 129, 0.2);
+      color: #34d399;
+      border: 1px solid #10b981;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 0.71rem;
+      font-weight: 700;
+      margin-right: 3px;
+    }
+
+    .ev-guide {
+      display: inline-block;
+      background: rgba(56, 189, 248, 0.2);
+      color: #38bdf8;
+      border: 1px solid #0284c7;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 0.71rem;
+      font-weight: 700;
+      margin-right: 3px;
+    }
+
+    .ev-est {
+      display: inline-block;
+      background: rgba(168, 85, 247, 0.18);
+      color: #c084fc;
+      border: 1px dashed #a855f7;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 0.71rem;
+      font-weight: 700;
+      margin-right: 3px;
+    }
+
+    .wikilink {
+      color: var(--accent-cyan);
+      background: rgba(56, 189, 248, 0.1);
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 0.88em;
+    }
+
+    .devil-box {
+      margin-top: 10px;
+      padding: 8px 11px;
+      background: rgba(244, 63, 94, 0.09);
+      border-left: 3px solid var(--bear-red);
+      border-radius: 6px;
+      font-size: 0.78rem;
+      color: #fecdd3;
+      line-height: 1.48;
+    }
+
+    /* Interactive Filter Buttons */
+    .filter-bar {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 6px 13px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .filter-btn:hover, .filter-btn.active {
+      background: rgba(56, 189, 248, 0.18);
+      border-color: var(--accent-cyan);
+      color: #fff;
+    }
+
+    /* Interactive Node Map */
+    .node-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .node-item {
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 14px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .node-item:hover, .node-item.selected {
+      background: var(--bg-card-hover);
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 0 1px var(--accent-cyan);
+    }
+
+    .node-item.hidden {
+      opacity: 0.2;
+      pointer-events: none;
+    }
+
+    .detail-box {
+      background: linear-gradient(160deg, #111c35, #0b1324);
+      border: 1px solid var(--accent-cyan);
+      border-radius: 12px;
+      padding: 18px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* Progress / Bar Charts */
+    .bar-row {
+      margin-bottom: 13px;
+    }
+
+    .bar-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.83rem;
+      margin-bottom: 5px;
+      font-weight: 600;
+    }
+
+    .bar-track {
+      height: 11px;
+      background: #1e293b;
+      border-radius: 99px;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: 99px;
+      background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan));
+    }
+
+    /* Tables */
+    table.wiki-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.81rem;
+    }
+
+    table.wiki-table th {
+      text-align: left;
+      padding: 10px 12px;
+      background: #111c33;
+      color: var(--accent-cyan);
+      border-bottom: 1px solid var(--border);
+      font-weight: 700;
+    }
+
+    table.wiki-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid rgba(30, 41, 59, 0.7);
+      line-height: 1.45;
+      color: #e2e8f0;
+      vertical-align: top;
+    }
+
+    table.wiki-table tr:hover td {
+      background: rgba(56, 189, 248, 0.05);
+    }
+
+    /* Timeline Tabs */
+    .phase-tabs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .phase-tab {
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 16px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .phase-tab.active {
+      border-color: var(--accent-cyan);
+      background: rgba(56, 189, 248, 0.14);
+    }
+
+    /* Footer */
+    .slide-footer {
+      margin-top: 14px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-badge">LLM WIKI DECK</span>
+      <span>美台 AI 供應鏈一二階傳導 & 實質基本面影響剖析</span>
+      <span class="loop-badge">Stage 3 1:1 Verified ✅</span>
+    </div>
+
+    <div class="slide-dots" id="slideDots">
+      <button class="dot-btn active" onclick="goToSlide(0)" style="border-color:rgba(56,189,248,0.6); color:#38bdf8;">00 🎓 新手教學導讀</button>
+      <button class="dot-btn" onclick="goToSlide(1)">01 頂層總覽</button>
+      <button class="dot-btn" onclick="goToSlide(2)">02 互動傳導圖譜</button>
+      <button class="dot-btn" onclick="goToSlide(3)">03 真假受惠與稀釋</button>
+      <button class="dot-btn" onclick="goToSlide(4)">04 2026-2029落地時程</button>
+      <button class="dot-btn" onclick="goToSlide(5)">05 風險壓力測試</button>
+      <button class="dot-btn" onclick="goToSlide(6)">06 個股操作總表</button>
+      <button class="dot-btn" onclick="goToSlide(7)" style="border-color:rgba(16,185,129,0.5); color:#34d399;">07 🛡️ 自我審查檢核</button>
+    </div>
+
+    <div class="controls">
+      <button class="nav-btn" onclick="prevSlide()">← 上一頁</button>
+      <span id="pageIndicator" style="font-size:0.8rem; color:var(--text-muted); min-width:44px; text-align:center;">1 / 8</span>
+      <button class="nav-btn" onclick="nextSlide()">下一頁 →</button>
+    </div>
+  </header>
+
+  <!-- Main Slide Viewport -->
+  <main class="viewport">
+
+    <!-- ==================== SLIDE 0: BEGINNER TUTORIAL & 5 BOTTLENECKS ==================== -->
+    <section class="slide active">
+      <div>
+        <div class="slide-header">
+          <div>
+            <div class="slide-kicker">Slide 00 / Beginner Tutorial — How AI Supply Chain & Event Transmission Works</div>
+            <h1 class="slide-title">🎓 零基礎教學導讀：什麼是「一二階事件傳導」？一次看懂 AI 伺服器五大硬體咽喉</h1>
+          </div>
+          <div class="wiki-source-pill">教學目標：讓不熟悉科技股的新手 3 分鐘掌握 Wiki 核心概念（點擊下方 5 大技術卡片互動學習）</div>
+        </div>
+
+        <!-- Top Concept Comparison: 1st Order vs 2nd Order -->
+        <div class="grid-3" style="margin-bottom: 16px;">
+          <div class="card" style="border-left: 4px solid var(--accent-cyan); padding: 13px 16px;">
+            <div style="font-size:0.75rem; color:var(--accent-cyan); font-weight:800; margin-bottom:4px;">💡 基礎概念 1：什麼是「一階傳導」？</div>
+            <div style="font-size:0.84rem; color:#e2e8f0; line-height:1.5;">
+              <strong>新聞事件直接撞擊的核心大廠</strong>。例如雲端巨頭（微軟/Google）砸大錢買 AI 伺服器，最先拿到訂單的晶片設計商（<span class="wikilink">[[NVDA 輝達]]</span>、<span class="wikilink">[[AVGO 博通]]</span>）與獨家晶圓代工廠（<span class="wikilink">[[2330 台積電]]</span>）就是一階受惠者。
+            </div>
+          </div>
+          <div class="card" style="border-left: 4px solid var(--bull-green); padding: 13px 16px;">
+            <div style="font-size:0.75rem; color:var(--bull-green); font-weight:800; margin-bottom:4px;">🌊 基礎概念 2：什麼是「二階外溢傳導」？</div>
+            <div style="font-size:0.84rem; color:#e2e8f0; line-height:1.5;">
+              <strong>當一階龍頭產能塞爆或規格大升級時，被迫分出去的肥肉</strong>。例如台積電封裝塞爆 &rarr; 訂單外溢給封測廠（<span class="wikilink">[[3711 日月光投控]]</span>）與載板廠（<span class="wikilink">[[3189 景碩]]</span>）；機櫃太燙太耗電 &rarr; 帶動 <span class="wikilink">[[3017 奇鋐]]</span> 水冷與 <span class="wikilink">[[2308 台達電]]</span> 電源櫃。
+            </div>
+          </div>
+          <div class="card" style="border-left: 4px solid var(--bear-red); padding: 13px 16px;">
+            <div style="font-size:0.75rem; color:var(--bear-red); font-weight:800; margin-bottom:4px;">🛡️ 基礎概念 3：什麼是「結構排擠與真假受惠」？</div>
+            <div style="font-size:0.84rem; color:#e2e8f0; line-height:1.5;">
+              <strong>新技術登場必有舊技術受害</strong>。當伺服器改用「100% 無風扇全水冷」與「光纖取代銅線」，傳統做氣冷風扇、傳統打線封裝或傳統鉛酸不斷電系統的廠商就會被排擠（<span class="tag tag-bear">🔴 利空</span>）。
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive 5 Hardware Bottlenecks Tutorial -->
+        <div class="filter-bar">
+          <button class="filter-btn active" onclick="selectTut(0, this)">① [[CoWoS]] 先進封裝（算力地基）</button>
+          <button class="filter-btn" onclick="selectTut(1, this)">② [[HBM]] 高頻寬記憶體（算力糧倉）</button>
+          <button class="filter-btn" onclick="selectTut(2, this)">③ [[液冷散熱]]（100% 無風扇水冷血管）</button>
+          <button class="filter-btn" onclick="selectTut(3, this)">④ [[CPO 共同封裝光學]]（矽光子光進銅退）</button>
+          <button class="filter-btn" onclick="selectTut(4, this)">⑤ [[BBU 備援電池模組]]（800V 電力心律調節器）</button>
+        </div>
+
+        <div class="card" id="tutBox" style="padding: 18px 22px; background: linear-gradient(160deg, #111c35, #0b1324); border-color: var(--accent-cyan);">
+          <!-- Dynamically populated by selectTut() -->
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <span>本簡報共收錄 5 篇 raw/ 原始新聞素材與 12 個 Wiki 知識節點 | 點擊上方 5 個按鈕可互動學習五大硬體咽喉</span>
+        <span>Slide 00 / 07（新手教學導讀頁）</span>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 1: EXECUTIVE SUMMARY ==================== -->
+    <section class="slide">
+      <div>
+        <div class="slide-header">
+          <div>
+            <div class="slide-kicker">Slide 01 / Executive Summary & Core Thesis</div>
+            <h1 class="slide-title">兩大結構巨浪交匯：輝達 Rubin 長約固樁 × 2027 四大 CSP 自研 ASIC 黃金交叉</h1>
+          </div>
+          <div class="wiki-source-pill">Wiki 基準：[[輝達Rubin平台量產與供應鏈固樁計畫]] | [[四大CSP資本支出與AI_ASIC黃金交叉追蹤]]</div>
+        </div>
+
+        <!-- 4 KPI Cards -->
+        <div class="grid-4" style="margin-bottom: 16px;">
+          <div class="card">
+            <div class="kpi-label">2026–2027 CSP 資本支出規模</div>
+            <div class="kpi-value">$7,300~7,400億</div>
+            <div class="kpi-sub">
+              <span class="ev-fact">[財報實績]</span> 2026 四大 CSP CapEx 創歷史新高（前九大破 9,500 億美元）；<span class="ev-est">[法人/研調預估]</span> 2027 九大 CSP 再增 50~60% 挑戰 <strong>1.3~1.5 兆美元</strong>。
+            </div>
+          </div>
+          <div class="card">
+            <div class="kpi-label">2027 AI 算力結構大洗牌</div>
+            <div class="kpi-value">ASIC 追平 GPU</div>
+            <div class="kpi-sub">
+              <span class="ev-est">[法人/研調預估]</span> 為緩解龐大硬體折舊壓力並優化「每瓦特產出 Token 數」推論成本，四大 CSP 加速自研 <span class="wikilink">[[AI ASIC]]</span>，2027 出貨量將首度追平或超越通用 GPU。
+            </div>
+          </div>
+          <div class="card">
+            <div class="kpi-label">台積電 CoWoS 產能與分配</div>
+            <div class="kpi-value">12~13 萬片/月</div>
+            <div class="kpi-sub">
+              <span class="ev-est">[法人/研調預估]</span> <span class="wikilink">[[2330 台積電]]</span> 2026 CoWoS 月產能邁向 12~13 萬片，<span class="wikilink">[[NVDA 輝達]]</span> 獨佔約 <strong>60%</strong>；<span class="ev-guide">[官方指引]</span> 輝達斥資數十億美元外溢固樁矽品與台灣 ABF 載板廠。
+            </div>
+          </div>
+          <div class="card">
+            <div class="kpi-label">二階台廠 2026Q3 毛利率新地板</div>
+            <div class="kpi-value">30.6% ~ 33.9%</div>
+            <div class="kpi-sub">
+              <span class="ev-fact">[財報實績]</span> 2026Q3 <span class="wikilink">[[3189 景碩]]</span> 毛利率 <strong>33.94%</strong>、<span class="wikilink">[[3017 奇鋐]]</span> <strong>33.86%</strong>、<span class="wikilink">[[3711 日月光投控]]</span> ATM <strong>30.6%</strong>；<span class="ev-guide">[官方指引]</span> 日月光宣示 30% 由天花板變地板。
+            </div>
+          </div>
+        </div>
+
+        <!-- Core Synthesis Cards (with Stage 2 Self-Review Balanced Caveats) -->
+        <div class="grid-3">
+          <div class="card" style="border-top: 3px solid var(--accent-cyan);">
+            <h3 style="font-size:0.98rem; margin-bottom:8px; color:#fff;">1. 一階核心傳導：算力雙引擎皆鎖死台積電</h3>
+            <p style="font-size:0.82rem; color:#cbd5e1; line-height:1.55;">
+              不論是 <span class="ev-guide">[官方指引]</span> 已進入量產出貨的輝達 <strong>Vera Rubin NVL72</strong>，或四大 CSP 聯手 <span class="wikilink">[[AVGO 博通]]</span> 衝刺的自研 ASIC，100% 依賴 <span class="wikilink">[[2330 台積電]]</span> 3nm/2nm 與 <span class="wikilink">[[CoWoS]]</span>（<span class="ev-fact">[財報實績]</span> 毛利率穩居 53%+）。
+            </p>
+            <div class="devil-box">
+              <strong>⚠️ 反方提醒 (Gate 3)</strong>：輝達推論端高毛利於 2027 面臨客戶自研 ASIC 分食；台積電須觀察海外廠量產初期折舊稀釋（約影響毛利 2~3%）。
+            </div>
+          </div>
+
+          <div class="card" style="border-top: 3px solid var(--bull-green);">
+            <h3 style="font-size:0.98rem; margin-bottom:8px; color:#fff;">2. 二階外溢兌現：從「題材沾邊」進入「毛利實質跳升」</h3>
+            <p style="font-size:0.82rem; color:#cbd5e1; line-height:1.55;">
+              <span class="ev-fact">[財報實績]</span> 2026Q3 財報證實高階封裝、大面積 ABF 與 100% 全液冷認證壁壘極高，帶動 <span class="wikilink">[[3711 日月光投控]]</span>、<span class="wikilink">[[3017 奇鋐]]</span>、<span class="wikilink">[[3189 景碩]]</span> 單季毛利率同步暴增 7~8 個百分點突破 30%~33%。
+            </p>
+            <div class="devil-box">
+              <strong>⚠️ 稀釋與時程提醒 (Gate 2)</strong>：評估日月光須剔除 38% 低毛利 EMS 代工稀釋；評估景碩須區分 2026 稼動率滿載與 2027–2029 新廠開出之時間差。
+            </div>
+          </div>
+
+          <div class="card" style="border-top: 3px solid var(--bear-red);">
+            <h3 style="font-size:0.98rem; margin-bottom:8px; color:#fff;">3. 結構性排擠：三大舊規格族群面臨實質邊緣化</h3>
+            <p style="font-size:0.82rem; color:#cbd5e1; line-height:1.55;">
+              <span class="ev-guide">[官方指引]</span> Rubin 世代淘汰氣冷輔助邁向 <strong>100% 全機櫃無風扇液冷</strong>，加上數十億美元長約鎖死高階產能與上游關鍵玻纖布材料，未跟上規格升級之舊世代廠商遭實質排擠。
+            </p>
+            <div class="devil-box">
+              <strong>🔴 三大受害群 (Gate 3)</strong>：① 純氣冷/傳統風扇廠（單櫃產值萎縮）；② 無先進封裝產能之二三線傳統封測廠；③ 未綁定 T-Glass 長約之小型載板廠。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <span>規格書來源：wiki/analyses/AI供應鏈實質影響分析_簡報大綱與逐頁內容規格書.md (Stage 3 1:1 零耗損編譯)</span>
+        <span>Slide 01 / 07（使用鍵盤 ← → 換頁）</span>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 2: INTERACTIVE TRANSMISSION MAP ==================== -->
+    <section class="slide">
+      <div>
+        <div class="slide-header">
+          <div>
+            <div class="slide-kicker">Slide 02 / Interactive 1st & 2nd Order Transmission Map</div>
+            <h1 class="slide-title">一階與二階產業鏈傳導互動圖譜：資金由單一 GPU 擴散至「封測/載板/全液冷」雙引擎</h1>
+          </div>
+          <div class="wiki-source-pill">點擊篩選按鈕或左側節點卡片，右側即時檢視 Gate 1~3 量化與反方細節</div>
+        </div>
+
+        <div class="filter-bar">
+          <button class="filter-btn active" onclick="filterNodes('all', this)">全部節點 (All)</button>
+          <button class="filter-btn" onclick="filterNodes('tier1', this)">一階核心算力與代工 (1st-Order)</button>
+          <button class="filter-btn" onclick="filterNodes('tier2-pack', this)">二階封測與載板外溢 (CoWoS/ABF)</button>
+          <button class="filter-btn" onclick="filterNodes('tier2-cool', this)">二階 100% 全液冷升級 (Liquid Cooling)</button>
+          <button class="filter-btn" onclick="filterNodes('squeeze', this)">🔴 結構性受排擠環節 (Squeezed)</button>
+        </div>
+
+        <div class="grid-2">
+          <!-- Left: Clickable Nodes -->
+          <div class="node-grid" id="nodeGrid">
+            <div class="node-item selected" data-cat="tier1" onclick="selectNode(0, this)">
+              <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
+                <strong>[[2330 台積電]]</strong>
+                <span class="tag tag-bull">🟢 一階利多</span>
+              </div>
+              <div style="font-size:0.78rem; color:var(--text-muted);">3nm/2nm + CoWoS 獨霸 | GPU 與 CSP ASIC 雙通吃</div>
+            </div>
+
+            <div class="node-item" data-cat="tier1" onclick="selectNode(1, this)">
+              <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
+                <strong>[[NVDA 輝達]] & [[AVGO 博通]]</strong>
+                <span class="tag tag-bull">🟢 一階雙核心</span>
+              </div>
+              <div style="font-size:0.78rem; color:var(--text-muted);">Rubin NVL72 量產固樁 vs. 2027 ASIC 出貨黃金交叉</div>
+            </div>
+
+            <div class="node-item" data-cat="tier2-pack" onclick="selectNode(2, this)">
+              <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
+                <strong>[[3711 日月光投控]] (含矽品)</strong>
+                <span class="tag tag-bull">🟢 二階封測外溢</span>
+              </div>
+              <div style="font-size:0.78rem; color:var(--text-muted);"><span class="ev-fact">[實績]</span> ATM 毛利 30.6% | <span class="ev-guide">[指引]</span> 2027 LEAP 翻倍挑戰 80 億美元</div>
+            </div>
+
+            <div class="node-item" data-cat="tier2-cool" onclick="selectNode(3, this)">
+              <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
+                <strong>[[3017 奇鋐]] ([[液冷散熱]])</strong>
+                <span class="tag tag-bull">🟢 二階規格升級</span>
+              </div>
+              <div style="font-size:0.78rem; color:var(--text-muted);"><span class="ev-fact">[實績]</span> Q3 毛利 33.86% | <span class="ev-guide">[指引]</span> 2027 ASIC 散熱超越 GPU</div>
+            </div>
+
+            <div class="node-item" data-cat="tier2-pack" onclick="selectNode(4, this)">
+              <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
+                <strong>[[3189 景碩]] & [[3037 欣興]]</strong>
+                <span class="tag tag-bull">🟢 二階載板固樁</span>
+              </div>
+              <div style="font-size:0.78rem; color:var(--text-muted);"><span class="ev-fact">[實績]</span> 景碩 Q3 毛利 33.94% 創 15 季新高 | 擴建幼獅廠專用產能</div>
+            </div>
+
+            <div class="node-item" data-cat="squeeze" onclick="selectNode(5, this)">
+              <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
+                <strong>純氣冷風扇 / 傳統封測 / 二線載板</strong>
+                <span class="tag tag-bear">🔴 二階結構排擠</span>
+              </div>
+              <div style="font-size:0.78rem; color:var(--text-muted);">Rubin 無風扇設計與 T-Glass 玻纖布缺料下之邊緣化受害群</div>
+            </div>
+          </div>
+
+          <!-- Right: Dynamic Detail Inspector -->
+          <div class="detail-box" id="nodeDetailBox">
+            <div>
+              <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
+                <span class="slide-kicker" id="d-tier">一階核心傳導節點</span>
+                <div>
+                  <span class="tag tag-bull" id="d-dir">🟢 利多 (Bullish)</span>
+                  <span class="tag tag-time" id="d-time">🏗️ 中長期基本面</span>
+                </div>
+              </div>
+              <h2 style="font-size:1.3rem; margin-bottom:8px; color:#fff;" id="d-title">[[2330 台積電]] — 算力咽喉與定價權霸主</h2>
+              <p style="font-size:0.84rem; color:#e2e8f0; line-height:1.55; margin-bottom:10px;" id="d-desc"></p>
+              <div class="card" style="background:rgba(15,23,42,0.78); padding:12px 14px; margin-bottom:8px;">
+                <div style="font-size:0.75rem; color:var(--accent-cyan); font-weight:700; margin-bottom:5px;">📊 實質財務、業務純度與反方失效條件 (Gate 1–3)</div>
+                <div style="font-size:0.81rem; color:#cbd5e1; line-height:1.52;" id="d-metrics"></div>
+              </div>
+            </div>
+            <div style="font-size:0.74rem; color:var(--text-muted); border-top:1px solid var(--border); padding-top:8px;" id="d-wiki"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <span>提示：點擊上方篩選按鈕或左側任一供應鏈節點，即可即時切換傳導邏輯、證據標籤與魔鬼代言人風險</span>
+        <span>Slide 02 / 07</span>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 3: REAL VS FAKE BENEFICIARIES & DILUTION CHECK ==================== -->
+    <section class="slide">
+      <div>
+        <div class="slide-header">
+          <div>
+            <div class="slide-kicker">Slide 03 / Fundamental Margin Shift, Dilution Check & Structural Squeeze</div>
+            <h1 class="slide-title">真假受惠辨別：二階龍頭「毛利率跳升逾 30%」實證 vs. 非核心稀釋與舊規格排擠</h1>
+          </div>
+          <div class="wiki-source-pill">左欄支援雙 Tab 切換：毛利率躍升橫條圖 ↔ Gate 2 業務純度與稀釋檢驗</div>
+        </div>
+
+        <div class="grid-2">
+          <!-- Left: Interactive Dual-Tab Card (Margin Bars vs. Gate 2 Dilution Check) -->
+          <div class="card">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+              <div class="filter-bar" style="margin-bottom:0;">
+                <button class="filter-btn active" id="s3TabBtn0" onclick="switchS3Tab(0)">🟢 Tab A：2026Q3 毛利率躍升實證</button>
+                <button class="filter-btn" id="s3TabBtn1" onclick="switchS3Tab(1)">🔍 Tab B：Gate 2 業務純度與稀釋檢驗</button>
+              </div>
+            </div>
+
+            <!-- Tab A Content: Margin Bars -->
+            <div id="s3Tab0">
+              <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:14px;">
+                真正的二階受惠股並非「低毛利代工湊熱鬧」，而是憑藉技術瓶頸（零漏液驗證、CoWoS 全製程、高層數 ABF）在 2026Q3 財報實現毛利率結構跳升：
+              </p>
+
+              <div class="bar-row">
+                <div class="bar-header">
+                  <span>[[2330 台積電]] — <span class="ev-fact">[財報實績]</span> 3nm/2nm & CoWoS 獨霸 (<span class="ev-est">[預估]</span> 2027 具漲價空間)</span>
+                  <span style="color:var(--accent-cyan);">53.0%+</span>
+                </div>
+                <div class="bar-track"><div class="bar-fill" style="width: 92%;"></div></div>
+              </div>
+
+              <div class="bar-row">
+                <div class="bar-header">
+                  <span>[[3189 景碩]] — <span class="ev-fact">[財報實績]</span> 2026Q3 創 15 季新高 (ABF 佔 46.7%，<span class="ev-est">[預估]</span> 2027 看 34.5%)</span>
+                  <span style="color:var(--bull-green);">33.94%</span>
+                </div>
+                <div class="bar-track"><div class="bar-fill" style="width: 73%; background:linear-gradient(90deg, #059669, #10b981);"></div></div>
+              </div>
+
+              <div class="bar-row">
+                <div class="bar-header">
+                  <span>[[3017 奇鋐]] — <span class="ev-fact">[財報實績]</span> 2026Q3 年增 +7.74% 三率三升 (<span class="ev-est">[預估]</span> 2027 液冷產能 +50%)</span>
+                  <span style="color:var(--bull-green);">33.86%</span>
+                </div>
+                <div class="bar-track"><div class="bar-fill" style="width: 72%; background:linear-gradient(90deg, #059669, #10b981);"></div></div>
+              </div>
+
+              <div class="bar-row" style="margin-bottom:0;">
+                <div class="bar-header">
+                  <span>[[3711 日月光投控]] — <span class="ev-fact">[財報實績]</span> 2026Q3 封測(ATM)年增 +8.0% (<span class="ev-guide">[指引]</span> 30% 成新地板)</span>
+                  <span style="color:var(--accent-cyan);">30.60%</span>
+                </div>
+                <div class="bar-track"><div class="bar-fill" style="width: 66%;"></div></div>
+              </div>
+            </div>
+
+            <!-- Tab B Content: Gate 2 Revenue Purity & Dilution Check -->
+            <div id="s3Tab1" style="display:none;">
+              <p style="font-size:0.8rem; color:var(--accent-cyan); font-weight:700; margin-bottom:10px;">
+                🛡️ Gate 2 審查：為什麼不能只看「題材名稱」或「合併營收」？非核心業務稀釋拆解：
+              </p>
+              <div style="display:flex; flex-direction:column; gap:10px;">
+                <div style="background:var(--bg-panel); padding:10px 12px; border-radius:8px; border-left:3px solid var(--accent-cyan); font-size:0.8rem; line-height:1.5;">
+                  <strong>1. [[3711 日月光投控]] 的 38% EMS 稀釋效應</strong>：<br>
+                  <span class="ev-fact">[財報實績]</span> 封測事業（ATM）佔集團營收約 <strong>62%</strong>，卻貢獻高達 <strong>91% 的營業利益</strong>（ATM 毛利率 30.6%）；其餘 <strong>38% 營收為低毛利 EMS 電子代工</strong>（僅貢獻 9% 營業利益）。<strong>實戰結論</strong>：必須直接看「ATM 獨立毛利率與 LEAP 營收」，不可被 EMS 稀釋後的合併毛利率誤導。
+                </div>
+                <div style="background:var(--bg-panel); padding:10px 12px; border-radius:8px; border-left:3px solid var(--watch-amber); font-size:0.8rem; line-height:1.5;">
+                  <strong>2. [[3189 景碩]] 的 53.3% 非 ABF 業務比重</strong>：<br>
+                  <span class="ev-fact">[財報實績]</span> 2026Q3 ABF 載板佔營收 <strong>46.7%</strong>（為毛利率衝上 33.94% 之主力），但仍有 <strong>53.3% 來自 BT 載板與子公司業務</strong>。<strong>實戰結論</strong>：需追蹤高階 AI ABF 佔比在 2027 是否進一步突破 55%~60%，以抵銷消費性電子波動。
+                </div>
+                <div style="background:var(--bg-panel); padding:10px 12px; border-radius:8px; border-left:3px solid var(--bull-green); font-size:0.8rem; line-height:1.5;">
+                  <strong>3. [[3017 奇鋐]] 的氣冷轉全液冷純度躍升</strong>：<br>
+                  伺服器散熱已佔營收絕對核心，<span class="ev-guide">[官方指引]</span> 2027 年不僅高毛利液冷（水冷板/分歧管/UQD）比重持續拉高，且 <strong>ASIC 散熱營收將正式超越 GPU 散熱營收</strong>，客戶集中度風險大幅下降。
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Structural Losers & Squeeze -->
+          <div style="display:flex; flex-direction:column; gap:12px;">
+            <div class="card" style="border-left: 4px solid var(--bear-red); padding:14px 16px;">
+              <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
+                <strong style="color:#fff; font-size:0.9rem;">🔴 排擠一：純氣冷散熱與傳統風扇廠</strong>
+                <span class="tag tag-bear">單櫃價值萎縮</span>
+              </div>
+              <p style="font-size:0.81rem; color:#cbd5e1; line-height:1.5;">
+                Blackwell GB300 是最後的「氣液混合橋樑」，<span class="ev-guide">[官方指引]</span> <strong>Vera Rubin 世代邁向 100% 全機櫃無風扇（Fanless）液冷與獨立電源機櫃</strong>。未通過微通道水冷板、UQD 快接頭氦氣零漏液驗證的傳統氣冷廠，在高階 AI 機櫃遭到實質淘汰。
+              </p>
+            </div>
+
+            <div class="card" style="border-left: 4px solid var(--bear-red); padding:14px 16px;">
+              <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
+                <strong style="color:#fff; font-size:0.9rem;">🔴 排擠二：無先進封裝產能之二三線傳統 OSAT</strong>
+                <span class="tag tag-bear">訂單高度集中</span>
+              </div>
+              <p style="font-size:0.81rem; color:#cbd5e1; line-height:1.5;">
+                <span class="ev-guide">[官方指引]</span> 輝達數十億美元資金直接綁定 <span class="wikilink">[[3711 日月光投控]]</span>（矽品）與 Amkor。高毛利的 CoWoS 全製程（2027 破 10 億美元）與 CPO 光引擎（2027 破 5 億美元）資本門檻極高，二三線傳統打線封測廠完全分不到外溢紅利。
+              </p>
+            </div>
+
+            <div class="card" style="border-left: 4px solid var(--watch-amber); padding:14px 16px;">
+              <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
+                <strong style="color:#fff; font-size:0.9rem;">🟡 排擠三：未綁定長約與 T-Glass 玻纖布之小型載板廠</strong>
+                <span class="tag tag-watch">上游缺料擠壓</span>
+              </div>
+              <p style="font-size:0.81rem; color:#cbd5e1; line-height:1.5;">
+                AI GPU 與 CSP 自研 ASIC 朝大面積 Chiplet 演進，大量消耗高層數 ABF 載板與上游 T-Glass 高階玻纖布。<span class="ev-guide">[官方指引]</span> 輝達長約直接固樁 <span class="wikilink">[[3189 景碩]]</span> 與 <span class="wikilink">[[3037 欣興]]</span>，缺乏長約的小廠面臨「搶不到料、又難轉嫁成本」窘境。
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <span>核心洞察：點擊左欄「Tab B」可檢視 Gate 2 業務純度與非核心業務稀釋效應；右欄為 Gate 3 三大結構性排擠族群</span>
+        <span>Slide 03 / 07</span>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 4: 2026-2029 TIMELINE ==================== -->
+    <section class="slide">
+      <div>
+        <div class="slide-header">
+          <div>
+            <div class="slide-kicker">Slide 04 / Revenue & Capacity Realization Timeline (2026–2029)</div>
+            <h1 class="slide-title">發酵時程與基本面落地時間軸：切分「當下毛利兌現」與「2028 遠期新廠產能」</h1>
+          </div>
+          <div class="wiki-source-pill">點擊下方三階段卡片切換各年度實質基本面催化劑與防追高警示</div>
+        </div>
+
+        <!-- Interactive Phase Selector -->
+        <div class="phase-tabs">
+          <div class="phase-tab active" onclick="selectPhase(0, this)">
+            <div style="font-size:0.76rem; color:var(--accent-cyan); font-weight:700;">PHASE 1 | 當下已兌現</div>
+            <div style="font-size:1.05rem; font-weight:800; margin:3px 0;">2026 Q3 – Q4</div>
+            <div style="font-size:0.78rem; color:var(--text-muted);">既有產能滿載、毛利率跳升逾 30%、Rubin 與 CPO 啟動量產</div>
+          </div>
+          <div class="phase-tab" onclick="selectPhase(1, this)">
+            <div style="font-size:0.76rem; color:var(--bull-green); font-weight:700;">PHASE 2 | 爆發主升段</div>
+            <div style="font-size:1.05rem; font-weight:800; margin:3px 0;">2027 全年</div>
+            <div style="font-size:0.78rem; color:var(--text-muted);">ASIC 出貨追平 GPU、日月光先進封裝營收翻倍、奇鋐液冷擴產 50%+</div>
+          </div>
+          <div class="phase-tab" onclick="selectPhase(2, this)">
+            <div style="font-size:0.76rem; color:var(--watch-amber); font-weight:700;">PHASE 3 | 遠期新廠開出</div>
+            <div style="font-size:1.05rem; font-weight:800; margin:3px 0;">2028 – 2029 年</div>
+            <div style="font-size:0.78rem; color:var(--text-muted);">景碩幼獅廠與矽品大型新廠全面到位、檢視折舊與供需再平衡</div>
+          </div>
+        </div>
+
+        <!-- Phase Detail Content -->
+        <div class="card" id="phaseContentBox" style="padding: 22px;"></div>
+      </div>
+
+      <div class="slide-footer">
+        <span>操作啟示：2026-2027 賺「毛利率躍升 + 第一波外溢營收翻倍」；2028-2029 則需追蹤大型新廠開出後的折舊與供需平衡</span>
+        <span>Slide 04 / 07</span>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 5: STRESS TEST MATRIX ==================== -->
+    <section class="slide">
+      <div>
+        <div class="slide-header">
+          <div>
+            <div class="slide-kicker">Slide 05 / Risk & Expectation Gap Stress Test Simulator</div>
+            <h1 class="slide-title">預期差與三大黑天鵝風險壓力測試：哪個環節最脆弱？誰是反受惠避風港？</h1>
+          </div>
+          <div class="wiki-source-pill">點擊切換壓力測試情境，檢視供應鏈脆弱度與反受惠邏輯</div>
+        </div>
+
+        <div class="filter-bar">
+          <button class="filter-btn active" onclick="selectStress(0, this)">⚠️ 情境一：100% 液冷機櫃漏液良率卡關 / 交機延遲</button>
+          <button class="filter-btn" onclick="selectStress(1, this)">⚠️ 情境二：CSP 因折舊壓力砍減高價 GPU、全面轉向自研 ASIC</button>
+          <button class="filter-btn" onclick="selectStress(2, this)">⚠️ 情境三：上游 T-Glass 高階玻纖布或 CoWoS 設備嚴重斷鏈</button>
+        </div>
+
+        <div class="grid-3" id="stressCards" style="margin-top:14px;"></div>
+      </div>
+
+      <div class="slide-footer">
+        <span>風險管理原則：優先配置「GPU + ASIC 雙引擎通吃」且具備「長約鎖料/高認證護城河」之一線龍頭</span>
+        <span>Slide 05 / 07</span>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 6: ACTIONABLE WATCHLIST TABLE ==================== -->
+    <section class="slide">
+      <div>
+        <div class="slide-header">
+          <div>
+            <div class="slide-kicker">Slide 06 / LLM Wiki Actionable Watchlist & Invalidation Criteria</div>
+            <h1 class="slide-title">知識庫核心節點操作總表：一二階評級、證據分級催化劑與反方失效條件</h1>
+          </div>
+          <div class="wiki-source-pill">支援上方分類過濾 | 完整包含 Gate 1~3 證據徽章、稀釋提醒與失效風險</div>
+        </div>
+
+        <div class="filter-bar">
+          <button class="filter-btn active" onclick="filterTable('all', this)">顯示全部 (All)</button>
+          <button class="filter-btn" onclick="filterTable('t1', this)">一階算力與代工核心 (1st-Order)</button>
+          <button class="filter-btn" onclick="filterTable('t2', this)">二階毛利質變龍頭 (2nd-Order)</button>
+        </div>
+
+        <div class="card" style="padding:0; overflow:hidden;">
+          <table class="wiki-table" id="watchlistTable">
+            <thead>
+              <tr>
+                <th>Wiki 節點 / 標的</th>
+                <th>傳導階層</th>
+                <th>多空與時效評級</th>
+                <th>2026Q3 實績 / 最新狀態 (Gate 1)</th>
+                <th>2027–2029 核心量化催化劑 (Gate 1/2)</th>
+                <th>業務稀釋提醒與利多失效條件 (Gate 2/3)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr data-tier="t1">
+                <td><strong>[[2330 台積電]]</strong></td>
+                <td>一階晶圓/封裝獨霸</td>
+                <td><span class="tag tag-bull">🟢 利多</span><span class="tag tag-time">🏗️ 中長期</span></td>
+                <td><span class="ev-fact">[財報實績]</span> 毛利率穩居 <strong>53%+</strong>；<span class="ev-est">[法人/研調預估]</span> CoWoS 月產能邁向 <strong>12~13 萬片</strong></td>
+                <td>通吃輝達 Rubin (<span class="ev-est">[預估]</span> 佔 CoWoS <strong>60%</strong>) 與 CSP 自研 ASIC；2027 具先進製程漲價空間</td>
+                <td><strong>失效風險</strong>：海外廠初期折舊稀釋（約影響毛利 2~3%）、先進封裝設備交期延誤</td>
+              </tr>
+              <tr data-tier="t1">
+                <td><strong>[[NVDA 輝達]]</strong></td>
+                <td>一階算力與規格制定</td>
+                <td><span class="tag tag-bull">🟢 利多</span><span class="tag tag-time">🏗️ 中長期</span></td>
+                <td><span class="ev-guide">[官方指引]</span> Vera Rubin NVL72 量產出貨；黃仁勳 11 月下旬回鍋穩定藍圖</td>
+                <td><span class="ev-guide">[官方指引]</span> 數十億美元長約固樁台灣封測與載板產能至 2029；推動 100% 無風扇全液冷機櫃</td>
+                <td><strong>失效風險</strong>：<span class="ev-est">[法人/研調預估]</span> 2027 年 CSP 自研 ASIC 出貨追平 GPU，分食推論市佔並制衡毛利</td>
+              </tr>
+              <tr data-tier="t2">
+                <td><strong>[[3017 奇鋐]]</strong></td>
+                <td>二階 100% 液冷龍頭</td>
+                <td><span class="tag tag-bull">🟢 利多</span><span class="tag tag-time">🏗️ 中長期</span></td>
+                <td><span class="ev-fact">[財報實績]</span> <strong>Q3 毛利率 33.86%</strong> (年增 +7.74%，三率三升)</td>
+                <td><span class="ev-est">[法人/研調預估]</span> 2027 液冷產能擴增 <strong>50%+</strong>；<span class="ev-guide">[官方指引]</span> <strong>2027 ASIC 散熱營收正式超越 GPU</strong></td>
+                <td><strong>失效風險</strong>：若發生 UQD/水冷板漏液品質事故引發認證洗牌，或 2027 同業/ODM 自製殺價競爭</td>
+              </tr>
+              <tr data-tier="t2">
+                <td><strong>[[3711 日月光投控]]</strong></td>
+                <td>二階 CoWoS 外溢核心</td>
+                <td><span class="tag tag-bull">🟢 利多</span><span class="tag tag-time">🏗️ 中長期</span></td>
+                <td><span class="ev-fact">[財報實績]</span> <strong>Q3 ATM 毛利率 30.6%</strong> (+8%，佔營益 91%)；<span class="ev-guide">[指引]</span> 30% 成新地板</td>
+                <td><span class="ev-guide">[官方指引]</span> 2027 LEAP 營收由 40 億翻倍至 <strong>80 億美元</strong>；CoWoS 全製程破 <strong>10 億</strong>、CPO 破 <strong>5 億美元</strong></td>
+                <td><strong>稀釋與失效</strong>：<span class="ev-fact">[實績]</span> <strong>38% 營收為低毛利 EMS</strong> 稀釋合併毛利（須看 ATM 毛利）；矽品擴廠至 2029 之折舊與良率風險</td>
+              </tr>
+              <tr data-tier="t2">
+                <td><strong>[[3189 景碩]]</strong></td>
+                <td>二階高階 ABF 載板</td>
+                <td><span class="tag tag-bull">🟢 利多</span><span class="tag tag-time">🏗️ 中長期</span></td>
+                <td><span class="ev-fact">[財報實績]</span> <strong>Q3 毛利率 33.94%</strong> (15季新高)，ABF 佔比 <strong>46.7%</strong>，稼動率 80~90%</td>
+                <td><span class="ev-est">[法人/研調預估]</span> 2027 毛利率看 <strong>34~34.5%</strong>；<span class="ev-guide">[官方指引]</span> 切入 Vera CPU/ASIC 載板，幼獅廠 <strong>2027–2029 開出</strong></td>
+                <td><strong>稀釋與時程</strong>：<strong>53.3% 仍為非 ABF 業務</strong>；幼獅/楊梅新廠 2027–2029 分批開出（勿混淆短期滿載與遠期新廠）；T-Glass 缺料反噬風險</td>
+              </tr>
+              <tr data-tier="t1">
+                <td><strong>[[AVGO 博通]] / [[2317 鴻海]]</strong></td>
+                <td>一階 ASIC / 機櫃 ODM</td>
+                <td><span class="tag tag-bull">🟢 利多</span><span class="tag tag-time">🏗️ 中長期</span></td>
+                <td><span class="ev-guide">[官方指引]</span> 博通主導 CSP ASIC 設計；鴻海主力交付 NVL72 機櫃</td>
+                <td><span class="ev-est">[法人/研調預估]</span> 2027 九大 CSP CapEx 挑戰 <strong>1.3~1.5 兆美元</strong>，ASIC 與全液冷整機櫃交付量雙爆發</td>
+                <td><strong>失效風險</strong>：整機櫃液冷組裝測試良率卡關導致交機遞延、CSP 自由現金流轉緊放緩拉貨</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <span>檔案位置：HW10/AI供應鏈實質影響分析簡報.html | 同步歸檔於 index.md 與 log.md</span>
+        <span>Slide 06 / 07</span>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 7: SELF-REVIEW & AUDIT GATE REPORT ==================== -->
+    <section class="slide">
+      <div>
+        <div class="slide-header">
+          <div>
+            <div class="slide-kicker">Slide 07 / AGENTS.md Chapter 6 & 7 — Self-Review & Verification Spec</div>
+            <h1 class="slide-title">🛡️ 強制自我審查檢核表：Gate 1~4 事實分級、業務純度、反方平衡與四層溯源簽核</h1>
+          </div>
+          <div class="wiki-source-pill">審查規範基準：AGENTS.md 第 6 & 7 章 | 狀態：Stage 1→2→3 全數通過 ✅</div>
+        </div>
+
+        <div class="grid-2" style="margin-bottom: 14px;">
+          <div class="card" style="border-top: 3px solid #10b981;">
+            <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+              <strong style="color:#fff;">Gate 1：事實分級與 100% 溯源審查</strong>
+              <span class="tag tag-bull">✅ 通過 (Zero Hallucination)</span>
+            </div>
+            <p style="font-size:0.81rem; color:#cbd5e1; line-height:1.55;">
+              • <span class="ev-fact">[財報實績]</span> <strong>已入帳確切財報</strong>：奇鋐 2026Q3 毛利率 <strong>33.86%</strong> (+7.74%)、日月光 2026Q3 ATM 毛利率 <strong>30.6%</strong> (+8.0%，佔集團營益 91%)、景碩 2026Q3 毛利率 <strong>33.94%</strong> (15季新高，ABF 佔比 46.7%)、四大 CSP 2026 CapEx <strong>7,300~7,400 億美元</strong>。<br>
+              • <span class="ev-guide">[官方指引]</span> <strong>法說與官方聲明</strong>：輝達 Rubin NVL72 量產並長約固樁矽品/景碩/欣興；日月光宣示「30% 為封測毛利新地板」、2026 LEAP &gt;40 億美元 (2027 翻倍)、CoWoS 全製程 2027 &gt;10 億美元、CPO 2026Q4 量產 (2027 &gt;5 億美元)；奇鋐預估 2027 ASIC 散熱營收超越 GPU。<br>
+              • <span class="ev-est">[法人/研調預估]</span> <strong>機構推估模型</strong>：2027 九大 CSP CapEx 挑戰 1.3~1.5 兆美元、2027 ASIC 出貨追平 GPU、台積電 CoWoS 月產能 12~13 萬片 (輝達佔 60%)、奇鋐 2027 液冷產能 +50%、景碩 2027 毛利率看 34~34.5%。
+            </p>
+          </div>
+
+          <div class="card" style="border-top: 3px solid var(--accent-cyan);">
+            <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+              <strong style="color:#fff;">Gate 2：實質含金量、非核心業務稀釋與時程對齊</strong>
+              <span class="tag tag-bull">✅ 通過 (Dilution Checked)</span>
+            </div>
+            <p style="font-size:0.81rem; color:#cbd5e1; line-height:1.55;">
+              • <strong>[[3711 日月光投控]] 的 EMS 稀釋盲點</strong>：雖然 ATM 封測毛利率達 30.6% 並貢獻 91% 營業利益，但集團仍有 <strong>38% 營收為低毛利 EMS 電子代工</strong>。審查結論：看日月光必須盯緊「ATM 獨立毛利率與營益率」，切勿被合併毛利率誤導。<br>
+              • <strong>[[3189 景碩]] 的非 ABF 比重與擴廠時間差</strong>：ABF 佔營收 46.7%，仍有 <strong>53.3% 為 BT 載板與子公司業務</strong>；且桃園幼獅/楊梅新廠產能為 <strong>2027–2029 分批開出</strong>，2026Q4–2027H1 獲利動能主要來自既有產能滿載與漲價，不可混淆遠期產能時程。<br>
+              • <strong>[[3017 奇鋐]] 的氣轉液斜率</strong>：伺服器散熱為絕對主力，需持續追蹤高毛利純水冷（雙面水冷板/UQD）替代傳統 3D VC 氣冷的實際季度配比。
+            </p>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="card" style="border-top: 3px solid var(--bear-red);">
+            <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+              <strong style="color:#fff;">Gate 3：魔鬼代言人（利多失效條件 & 結構性排擠）</strong>
+              <span class="tag tag-bull">✅ 通過 (Bias Balanced)</span>
+            </div>
+            <p style="font-size:0.81rem; color:#cbd5e1; line-height:1.55;">
+              • <strong>各龍頭利多失效條件</strong>：① <strong>奇鋐</strong>：若發生機櫃漏液品質事故或 2027 同業/ODM 自製水冷板殺價競爭；② <strong>日月光</strong>：矽品大擴廠至 2029 年之巨額折舊若遇 CoWoS 全製程良率爬坡緩慢；③ <strong>景碩</strong>：若上游 T-Glass 玻纖布缺料嚴重到反噬自身出貨量；④ <strong>輝達</strong>：2027 CSP 自研 ASIC 大舉分食推論市佔壓抑 GPU 毛利。<br>
+              • <strong>明確點出結構性受害群 (🔴 利空)</strong>：純氣冷/傳統風扇廠（Rubin 100% 無風扇設計）、無先進封裝產能之二三線傳統封測廠、未綁長約搶不到 T-Glass 之小型載板廠。
+            </p>
+          </div>
+
+          <div class="card" style="border-top: 3px solid var(--accent-purple);">
+            <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+              <strong style="color:#fff;">Gate 4 & Gate S1/S2：四層閉環與投影片 1:1 零耗損保真審查</strong>
+              <span class="tag tag-bull">✅ 通過 (1:1 Fidelity)</span>
+            </div>
+            <p style="font-size:0.81rem; color:#cbd5e1; line-height:1.55;">
+              • <strong>100% 溯源檔案</strong>：<br>
+                1. <code>raw/2026-11-23_輝達Rubin量產與擴大投資台灣先進封裝載板供應鏈.md</code><br>
+                2. <code>raw/2026-11-23_四大CSP資本支出與奇鋐日月光景碩實質毛利營收數據.md</code><br>
+              • <strong>Loop 規格書連動</strong>：本簡報由 <code>wiki/analyses/AI供應鏈實質影響分析_簡報大綱與逐頁內容規格書.md</code> 經 Stage 1（大綱確認）&rarr; Stage 2（逐頁五關卡自審與確認）&rarr; Stage 3（1:1 零耗損 HTML 編譯）生成，與 <code>index.md</code>、<code>log.md</code> 完全同步。
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <span>自我審查與三階段投影片迴圈規範已永久寫入 HW10/AGENTS.md 第 6 & 7 章</span>
+        <span>Slide 07 / 07</span>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    // ==================== SLIDE NAVIGATION ====================
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.dot-btn');
+    const pageIndicator = document.getElementById('pageIndicator');
+
+    function goToSlide(index) {
+      if (index < 0) index = slides.length - 1;
+      if (index >= slides.length) index = 0;
+      currentSlide = index;
+
+      slides.forEach((s, i) => s.classList.toggle('active', i === currentSlide));
+      dots.forEach((d, i) => d.classList.toggle('active', i === currentSlide));
+      pageIndicator.textContent = `${currentSlide + 1} / ${slides.length}`;
+    }
+
+    function nextSlide() { goToSlide(currentSlide + 1); }
+    function prevSlide() { goToSlide(currentSlide - 1); }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); nextSlide(); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); prevSlide(); }
+    });
+
+    // ==================== SLIDE 0: BEGINNER 5 BOTTLENECKS TUTORIAL ====================
+    const tutData = [
+      {
+        title: "① [[CoWoS]] 先進封裝 — 把「大腦 GPU」與「記憶體 HBM」拼在同一塊地基上的關鍵咽喉",
+        metaphor: "🏠 白話比喻：就像蓋超高大樓的「超精密地基與地下連通道」。如果沒有 CoWoS 把 GPU 和 HBM 緊密拼在一起，算力再強的晶片也無法運作，因此「CoWoS 產能上限＝全球 AI 晶片出貨上限」。",
+        transmission: "• <strong>一階核心</strong>：<span class='wikilink'>[[2330 台積電]]</span>（<span class='ev-est'>[法人/研調預估]</span> 2026 月產能邁向 12~13 萬片，<span class='wikilink'>[[NVDA 輝達]]</span> 包攬約 60%）。<br>• <strong>二階外溢受惠</strong>：因台積電產能塞爆，訂單強烈外溢至委外封測龍頭 <span class='wikilink'>[[3711 日月光投控]]</span>（<span class='ev-guide'>[官方指引]</span> 矽品獲輝達數十億美元支持擴產，2027 CoWoS 全製程營收破 10 億美元）與高階 ABF 載板廠 <span class='wikilink'>[[3189 景碩]]</span>、<span class='wikilink'>[[3037 欣興]]</span>。",
+        raw: "對應知識庫來源：raw/2026-11-23_輝達Rubin量產與擴大投資台灣先進封裝載板供應鏈.md | wiki/supply-chain/CoWoS.md"
+      },
+      {
+        title: "② [[HBM]] 高頻寬記憶體 — 垂直疊起來的「超高速算力糧倉」（HBM4 底座全數轉向台積電）",
+        metaphor: "🏢 白話比喻：傳統記憶體像平房，資料進出馬路很窄；HBM 把 12~16 層 DRAM 垂直疊成摩天大樓並打通電梯（TSV），讓海量 AI 資料一秒灌進 GPU。到了 HBM4 世代（2,048-bit），最底層的控制底座（Base Die）更直接變成一顆高階邏輯晶片！",
+        transmission: "• <strong>一階記憶體三雄與代工樞紐</strong>：<span class='ev-guide'>[官方指引]</span> <span class='wikilink'>[[000660.KS SK海力士]]</span>、<span class='wikilink'>[[MU 美光]]</span>（2027 HBM4E）、<span class='wikilink'>[[005930.KS 三星電子]]</span> 三大廠在 HBM4/4E 世代，全數將底層 Base Die 交由 <span class='wikilink'>[[2330 台積電]]</span> 先進邏輯製程（12nm/3nm）代工！<br>• <strong>傳導意義</strong>：台積電不僅掌握 CoWoS 封裝，更連 HBM 記憶體底座都一手掌握，護城河深不可測。",
+        raw: "對應知識庫來源：raw/2026-11-24_HBM4與HBM4E基礎裸晶Base_Die全面轉向台積電先進製程.md | wiki/supply-chain/HBM.md"
+      },
+      {
+        title: "③ [[液冷散熱]] — 解決單機櫃破 140kW~200kW 高熱的「100% 無風扇水冷血管系統」",
+        metaphor: "❄️ 白話比喻：當一台 AI 伺服器機櫃的發熱量相當於 100 台吹風機同時開到最大，吹風（氣冷）已經完全吹不涼了！必須直接把裝有冷卻液的「微通道水冷板」貼在晶片上把熱帶走，而且絕對不能漏水（零漏液氦氣檢測）。",
+        transmission: "• <strong>規格跳躍</strong>：<span class='ev-guide'>[官方指引]</span> 輝達 Rubin 世代正式淘汰氣冷輔助，邁向 <strong>100% 全機櫃無風扇（Fanless）液冷設計</strong>。<br>• <strong>二階核心受惠與排擠</strong>：水冷龍頭 <span class='wikilink'>[[3017 奇鋐]]</span> <span class='ev-fact'>[財報實績]</span> 2026Q3 毛利率衝上 <strong>33.86%</strong>（<span class='ev-guide'>[官方指引]</span> 2027 年 ASIC 散熱營收將正式超越 GPU）；反之，未切入液冷的<strong>純氣冷/傳統風扇廠</strong>則遭結構性排擠（<span class='tag tag-bear'>🔴 利空</span>）。",
+        raw: "對應知識庫來源：raw/2026-11-23_四大CSP資本支出與奇鋐日月光景碩實質毛利營收數據.md | wiki/supply-chain/液冷散熱.md"
+      },
+      {
+        title: "④ [[CPO 共同封裝光學]] — 用「光速」取代「銅線」打破資料中心互連耗電牆（省電 70%~90%）",
+        metaphor: "⚡ 白話比喻：當成千上萬顆 AI 晶片要以 1.6T / 3.2T 的超高速互相傳資料時，傳統銅線會因為電阻產生驚人高熱與訊號失真。CPO（矽光子）直接把「光學引擎」封裝在晶片旁邊，把電訊號變成光訊號傳輸，一舉省下 70%~90% 互連耗電！",
+        transmission: "• <strong>一階平台與交換器霸主</strong>：<span class='ev-guide'>[官方指引]</span> <span class='wikilink'>[[2330 台積電]]</span> <strong>COUPE 矽光子平台</strong>於 2026 正式量產，獲 <span class='wikilink'>[[AVGO 博通]]</span> Tomahawk 6 CPO 交換器與輝達採用。<br>• <strong>二階封測與散熱外溢</strong>：<span class='wikilink'>[[3711 日月光投控]]</span> <span class='ev-guide'>[官方指引]</span> CPO 光引擎於 2026Q4 量產、<strong>2027 年營收突破 5 億美元</strong>；<span class='wikilink'>[[3017 奇鋐]]</span> 同步切入 1.6TB 光模組水冷；二階光纖耦合夥伴含 <span class='wikilink'>[[3363 上詮]]</span>、<span class='wikilink'>[[6451 訊芯-KY]]</span>。",
+        raw: "對應知識庫來源：raw/2026-11-24_CPO共同封裝光學商轉元年與台積電COUPE及1.6T矽光子供應鏈.md | wiki/supply-chain/CPO 共同封裝光學.md"
+      },
+      {
+        title: "⑤ [[BBU 備援電池模組]] & 800V 電源櫃 — 毫秒級穩壓防斷電的「AI 機櫃心律調節器」",
+        metaphor: "🔋 白話比喻：AI 訓練時，整櫃耗電量會在「幾毫秒內」從低檔瞬間飆到 140kW~200kW 滿載！如果電網稍微閃一下或跳電，價值上億的訓練進度與晶片就會損毀。因此機櫃內建的高功率鋰電池 BBU 與 800V 高壓直流電源櫃，從過去的「選配」變成了「剛性標配」！",
+        transmission: "• <strong>一階 800V HVDC 電源機櫃雙雄</strong>：<span class='ev-guide'>[官方指引]</span> <span class='wikilink'>[[2308 台達電]]</span>（包辦 PSU、BBU Shelf 到 800V 液冷電源櫃）與 <span class='wikilink'>[[2301 光寶科]]</span>（2027 高雄廠量產 800V 電源櫃）。<br>• <strong>二階高純度 BBU 模組廠</strong>：<span class='wikilink'>[[6781 AES-KY]]</span>（北美 CSP 主力，高功率 BBU 單價倍增）與 <span class='wikilink'>[[3211 順達]]</span>（<span class='ev-fact'>[財報實績]</span> 非 IT 營收正式突破 50% 過半）；同時排擠傳統集中式鉛酸 UPS 設備（<span class='tag tag-bear'>🔴 利空</span>）。",
+        raw: "對應知識庫來源：raw/2026-11-24_AI伺服器800V高壓直流電源機櫃與BBU備援電池標配化革命.md | wiki/supply-chain/BBU 備援電池模組.md"
+      }
+    ];
+
+    function selectTut(idx, btn) {
+      if (btn) {
+        btn.parentElement.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      }
+      const t = tutData[idx];
+      document.getElementById('tutBox').innerHTML = `
+        <h3 style="font-size:1.18rem; color:#fff; margin-bottom:10px;">${t.title}</h3>
+        <div style="background:rgba(56,189,248,0.1); border-left:3px solid var(--accent-cyan); padding:9px 14px; border-radius:6px; font-size:0.84rem; color:#e2e8f0; margin-bottom:10px; line-height:1.55;">
+          ${t.metaphor}
+        </div>
+        <div style="font-size:0.83rem; color:#cbd5e1; line-height:1.6; margin-bottom:8px;">
+          ${t.transmission}
+        </div>
+        <div style="font-size:0.73rem; color:var(--text-muted); border-top:1px solid var(--border); padding-top:6px; font-family:monospace;">
+          ${t.raw}
+        </div>
+      `;
+    }
+    selectTut(0);
+
+    // ==================== SLIDE 2: INTERACTIVE TRANSMISSION NODES (1:1 FROM STAGE 2 SPEC) ====================
+    const nodeData = [
+      {
+        tier: "一階核心傳導節點 (1st-Order Foundry & Packaging)",
+        dir: "🟢 利多 (Bullish)",
+        dirClass: "tag-bull",
+        time: "🏗️ 中長期基本面",
+        title: "[[2330 台積電]] — 算力咽喉與定價權霸主",
+        desc: "<span class='ev-est'>[法人/研調預估]</span> 2026 年 CoWoS 月產能逐步朝 12~13 萬片邁進，<span class='wikilink'>[[NVDA 輝達]]</span> 包攬約 60% 產能份額；同時 2027 年出貨量追平 GPU 的四大 CSP 自研 <span class='wikilink'>[[AI ASIC]]</span> 也 100% 依賴台積電 3nm/2nm 先進製程。",
+        metrics: "• <span class='ev-fact'>[財報實績]</span> 毛利率穩守 <strong>53% 以上</strong>高標；<span class='ev-est'>[法人/研調預估]</span> 2027 年先進製程與先進封裝具備進一步調漲空間。<br>• <strong>外溢樞紐</strong>：因自身 CoWoS 產能長期供不應求，直接催生對 <span class='wikilink'>[[3711 日月光投控]]</span> 與台灣 ABF 載板廠的龐大二階外溢訂單。<br>• <span style='color:#fda4af;'><strong>⚠️ 魔鬼代言人風險 (Gate 3)</strong>：海外廠（美、日、歐）量產初期折舊成本較高（約稀釋毛利 2~3%），且 CoWoS 設備交期與地緣政治關稅為潛在干擾。</span>",
+        wiki: "關聯 Wiki 頁面：[[2330 台積電]] | [[CoWoS]] | [[輝達Rubin平台量產與供應鏈固樁計畫]]"
+      },
+      {
+        tier: "一階算力雙引擎 (1st-Order Compute Architects)",
+        dir: "🟢 利多 / 🟡 結構競合",
+        dirClass: "tag-bull",
+        time: "🏗️ 中長期基本面",
+        title: "[[NVDA 輝達]] & [[AVGO 博通]] — GPU 固樁 vs. ASIC 黃金交叉",
+        desc: "<span class='ev-guide'>[官方指引]</span> 輝達 Vera Rubin NVL72 與 Vera CPU 正式量產出貨，並斥資數十億美元長約鎖定台灣封測與載板產能至 2029 年（黃仁勳於 2026 年 11 月下旬恢復總裁暨執行長職務穩定市場信心）；同時 <span class='ev-fact'>[財報實績]</span> 四大 CSP 2026 資本支出破 7,300 億美元，全力扶植自研 ASIC，使 <span class='wikilink'>[[AVGO 博通]]</span> 成為 <span class='ev-est'>[法人/研調預估]</span> 2027 年 ASIC 出貨追平 GPU 的最大晶片設計與高速 SerDes IP 贏家。",
+        metrics: "• 輝達透過機櫃級 100% 全液冷整合與 NVLink 鞏固高毛利護城河；博通（AVGO）受惠 Google TPU、Meta MTIA 等自研晶片倍增。<br>• <span style='color:#fda4af;'><strong>⚠️ 魔鬼代言人風險 (Gate 3)</strong>：2027 年 CSP 自研 ASIC 大規模放量後，輝達在「推論（Inference）」市場之定價權與超高毛利率將面臨客戶自研方案制衡。</span>",
+        wiki: "關聯 Wiki 頁面：[[NVDA 輝達]] | [[四大CSP資本支出與AI_ASIC黃金交叉追蹤]]"
+      },
+      {
+        tier: "二階封測外溢龍頭 (2nd-Order OSAT Spillover)",
+        dir: "🟢 強力利多 (Bullish)",
+        dirClass: "tag-bull",
+        time: "🏗️ 中長期毛利質變",
+        title: "[[3711 日月光投控]] — 「30% 封測毛利從天花板變地板」",
+        desc: "台積電 CoWoS 塞爆下的最大實質外溢受惠者。<span class='ev-guide'>[官方指引]</span> 旗下矽品（SPIL）獲輝達數十億美元資金承諾擴充台灣先進封裝一站式產能（目標擴增至 2029 年中），同時承接大量 CSP 自研 ASIC 先進封測（FOCoS）訂單。",
+        metrics: "• <span class='ev-fact'>[財報實績]</span> <strong>2026Q3 封測事業 (ATM) 毛利率跳升至 30.6%（年增 +8.0 個百分點）</strong>；<span class='ev-guide'>[官方指引]</span> 管理層宣告 30% 已成未來毛利新地板。<br>• <span class='ev-guide'>[官方指引]</span> <strong>量化營收三級跳</strong>：<strong>LEAP 先進封裝</strong> 2026 營收破 40 億美元 &rarr; 2027 <strong>翻倍挑戰 80 億美元</strong>；<strong>CoWoS 全製程</strong> 2026 約 3 億美元 &rarr; 2027 <strong>突破 10 億美元</strong>；<strong>CPO 光引擎</strong> 2026Q4 量產 &rarr; 2027 <strong>突破 5 億美元</strong>。<br>• <span style='color:#fda4af;'><strong>⚠️ Gate 2 業務純度與稀釋警示</strong>：<span class='ev-fact'>[財報實績]</span> ATM 佔集團營收約 62%（貢獻高達 91% 營業利益），但仍有 <strong>38% 營收為低毛利 EMS 電子代工</strong>（會稀釋集團合併毛利率）。觀察重點必須鎖定「ATM 獨立毛利率」，加上矽品擴廠至 2029 之折舊爬坡風險。</span>",
+        wiki: "關聯 Wiki 頁面：[[3711 日月光投控]] | [[CoWoS]]"
+      },
+      {
+        tier: "二階散熱規格升級龍頭 (2nd-Order 100% Liquid Cooling)",
+        dir: "🟢 強力利多 (Bullish)",
+        dirClass: "tag-bull",
+        time: "🏗️ 中長期毛利質變",
+        title: "[[3017 奇鋐]] — 100% 全液冷升級 + 2027 ASIC 散熱超越 GPU",
+        desc: "<span class='ev-guide'>[官方指引]</span> 隨 Rubin 機櫃淘汰氣冷邁向 100% 無風扇全液冷、雙面微通道水冷板與 1.6TB 光收發模組水冷，散熱瓶頸轉向「氦氣測漏與零漏液精密製造」。奇鋐同時掌握輝達與四大 CSP 自研 ASIC 水冷大單。",
+        metrics: "• <span class='ev-fact'>[財報實績]</span> <strong>2026Q3 毛利率衝上 33.86%（季增 1.29%、年增 +7.74%）</strong>，呈三率三升；<span class='ev-est'>[法人/研調預估]</span> 2026 全年毛利率上看 <strong>31%~34%</strong>。<br>• <span class='ev-guide'>[官方指引]</span> 公司預期 <strong>2027 年 ASIC 散熱營收將正式超越 GPU 散熱營收</strong>；<span class='ev-est'>[法人/研調預估]</span> 2027 高階液冷產能擴增 <strong>50% 以上</strong>。<br>• <span style='color:#fda4af;'><strong>⚠️ 魔鬼代言人風險 (Gate 3)</strong>：① 機櫃級液冷若發生快接頭（UQD）漏液事故將引發認證洗牌；② 2027 年隨同業（如雙鴻）與 ODM 自製產能開出，需留意標準型水冷板是否出現價格競爭。</span>",
+        wiki: "關聯 Wiki 頁面：[[3017 奇鋐]] | [[液冷散熱]]"
+      },
+      {
+        tier: "二階高階載板固樁 (2nd-Order ABF Substrate)",
+        dir: "🟢 利多 (Bullish)",
+        dirClass: "tag-bull",
+        time: "🏗️ 中長期基本面",
+        title: "[[3189 景碩]] & [[3037 欣興]] — 稼動率滿載與長約擴廠",
+        desc: "高階 GPU（及 Vera CPU）與 CSP 自研 ASIC 朝大尺寸 Chiplet 發展，消耗數倍面積之高層數 ABF 載板。<span class='ev-guide'>[官方指引]</span> 輝達直接與景碩、欣興簽署多年期合作，支持景碩擴建桃園幼獅廠專用產能。",
+        metrics: "• <span class='ev-fact'>[財報實績]</span> <strong>[[3189 景碩]] 2026Q3 毛利率飆升至 33.94%（創近 15 季新高）</strong>，ABF 營收佔比達 <strong>46.7%</strong>（超越 BT 載板），高階稼動率達 <strong>80%~90%</strong>。<br>• <span class='ev-est'>[法人/研調預估]</span> 受惠上游 T-Glass 玻纖布吃緊支撐報價，2027 年景碩平均毛利率上看 <strong>34%~34.5%</strong>。<br>• <span style='color:#fda4af;'><strong>⚠️ Gate 2 業務純度與時程差警示</strong>：景碩仍有 <strong>53.3% 營收為 BT 載板與轉投資業務</strong>（受消費性電子影響）；且桃園幼獅/楊梅新廠產能是在 <strong>2027–2029 年分批開出</strong>，短期獲利成長主要來自既有產能滿載與報價調升，切勿將遠期擴廠當成當季營收暴增。</span>",
+        wiki: "關聯 Wiki 頁面：[[3189 景碩]] | [[CoWoS]]"
+      },
+      {
+        tier: "二階結構性受害環節 (2nd-Order Structural Losers)",
+        dir: "🔴 利空 / 排擠 (Bearish)",
+        dirClass: "tag-bear",
+        time: "🏗️ 中長期結構淘汰",
+        title: "純氣冷風扇 / 傳統封測 / 二線載板 — 結構性受排擠族群",
+        desc: "AI 供應鏈進入「強者恆強、數十億美元長約綁定、規格跳躍」階段，未跟上技術演進或無力負擔高資本支出的舊規格廠商面臨實質訂單排擠。",
+        metrics: "• <strong>🔴 純氣冷/傳統風扇廠</strong>：在 Rubin 100% 無風扇（Fanless）全液冷架構下，單機櫃氣冷產值大幅萎縮。<br>• <strong>🔴 傳統打線封測廠</strong>：無力投資 CoWoS 全製程與高階 FT 測試設備，完全分不到 AI 外溢紅利。<br>• <strong>🔴 未綁約小型載板廠</strong>：受困上游日系 T-Glass 高階玻纖布缺料，且缺乏向客戶轉嫁成本的議價權。",
+        wiki: "關聯 Wiki 頁面：[[AI供應鏈一二階傳導與2026-2029實質基本面影響深度剖析]]"
+      }
+    ];
+
+    function selectNode(idx, el) {
+      document.querySelectorAll('.node-item').forEach(n => n.classList.remove('selected'));
+      if (el) el.classList.add('selected');
+      const d = nodeData[idx];
+      document.getElementById('d-tier').textContent = d.tier;
+      const dirEl = document.getElementById('d-dir');
+      dirEl.textContent = d.dir;
+      dirEl.className = 'tag ' + d.dirClass;
+      document.getElementById('d-time').textContent = d.time;
+      document.getElementById('d-title').textContent = d.title;
+      document.getElementById('d-desc').innerHTML = d.desc;
+      document.getElementById('d-metrics').innerHTML = d.metrics;
+      document.getElementById('d-wiki').textContent = d.wiki;
+    }
+    selectNode(0, document.querySelector('.node-item'));
+
+    function filterNodes(cat, btn) {
+      btn.parentElement.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('#nodeGrid .node-item').forEach(item => {
+        if (cat === 'all' || item.dataset.cat === cat) {
+          item.classList.remove('hidden');
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+    }
+
+    // ==================== SLIDE 3: DUAL TAB SWITCHER ====================
+    function switchS3Tab(idx) {
+      document.getElementById('s3TabBtn0').classList.toggle('active', idx === 0);
+      document.getElementById('s3TabBtn1').classList.toggle('active', idx === 1);
+      document.getElementById('s3Tab0').style.display = idx === 0 ? 'block' : 'none';
+      document.getElementById('s3Tab1').style.display = idx === 1 ? 'block' : 'none';
+    }
+
+    // ==================== SLIDE 4: TIMELINE PHASES (1:1 FROM STAGE 2 SPEC) ====================
+    const phases = [
+      {
+        badge: "PHASE 1：2026 Q3 – Q4（當下已兌現之實質基本面）",
+        title: "既有高階產能稼動率拉滿 → 二階龍頭毛利率全面跳升逾 30%",
+        points: [
+          "<strong>① 財報已兌現毛利率質變</strong>：不需要等 2028 新廠，<span class='ev-fact'>[財報實績]</span> 2026Q3 財報已證實產品組合優化威力 —— <span class='wikilink'>[[3189 景碩]]</span> 毛利率達 <strong>33.94%</strong>（15 季新高，ABF 稼動率 80~90%）、<span class='wikilink'>[[3017 奇鋐]]</span> 達 <strong>33.86%</strong>（年增 +7.74%）、<span class='wikilink'>[[3711 日月光投控]]</span> ATM 達 <strong>30.6%</strong>（年增 +8.0%）。",
+          "<strong>② 一階新平台與資本支出創高</strong>：<span class='ev-fact'>[財報實績]</span> 2026 四大 CSP 資本支出衝上 <strong>7,300~7,400 億美元</strong>；<span class='ev-guide'>[官方指引]</span> <span class='wikilink'>[[NVDA 輝達]]</span> Vera Rubin NVL72 與 Vera CPU 正式啟動量產出貨；<span class='ev-est'>[法人/研調預估]</span> <span class='wikilink'>[[2330 台積電]]</span> CoWoS 月產能邁向 <strong>12~13 萬片</strong>。",
+          "<strong>③ CPO 光引擎進入量產</strong>：<span class='ev-guide'>[官方指引]</span> 日月光 <span class='wikilink'>[[CPO 共同封裝光學]]</span> 產品於 <strong>2026Q4</strong> 正式進入量產，為 2027 光通訊封裝爆發奠定基礎。"
+        ]
+      },
+      {
+        badge: "PHASE 2：2027 全年（黃金交叉與外溢營收倍增爆發期）",
+        title: "九大 CSP 資本支出破 1.3 兆美元 + AI ASIC 出貨追平 GPU + 外溢營收翻倍",
+        points: [
+          "<strong>① ASIC vs. GPU 黃金交叉</strong>：<span class='ev-est'>[法人/研調預估]</span> 2027 年全球九大 CSP 資本支出預估增 50~60% 達 <strong>1.3~1.5 兆美元</strong>，自研 <span class='wikilink'>[[AI ASIC]]</span> 出貨量首度追平或超越通用 GPU，<span class='wikilink'>[[AVGO 博通]]</span> 與 <span class='wikilink'>[[2330 台積電]]</span> 直接受惠。",
+          "<strong>② [[3711 日月光投控]] 營收量化三級跳</strong>：<span class='ev-guide'>[官方指引]</span> LEAP 先進封裝營收從 2026 年 40 億美元<strong>翻倍至 80 億美元</strong>；CoWoS 全製程從 3 億美元<strong>突破 10 億美元</strong>（+233%）；CPO 營收<strong>突破 5 億美元</strong>。",
+          "<strong>③ [[3017 奇鋐]] 散熱結構翻轉</strong>：<span class='ev-est'>[法人/研調預估]</span> 高階液冷產能擴增 <strong>50% 以上</strong>，且 <span class='ev-guide'>[官方指引]</span> <strong>2027 年 ASIC 散熱營收正式超越 GPU 散熱營收</strong>，雙面水冷板與 1.6TB 光模組水冷放量。",
+          "<strong>④ [[3189 景碩]] 毛利站穩高檔</strong>：<span class='ev-est'>[法人/研調預估]</span> 高階 ABF 滿載加上 T-Glass 玻纖布吃緊支撐報價，2027 全年毛利率預估站穩 <strong>34%~34.5%</strong>，桃園幼獅廠首波新產能開始銜接。"
+        ]
+      },
+      {
+        badge: "PHASE 3：2028 – 2029 年（遠期長約新廠全面開出與供需再平衡）",
+        title: "數十億美元固樁之新建廠房全面投產 → 檢視折舊與終端算力消化率",
+        points: [
+          "<strong>① 大型專用新廠陸續到位</strong>：<span class='ev-guide'>[官方指引]</span> <span class='wikilink'>[[3189 景碩]]</span> 桃園幼獅廠與楊梅廠高階 ABF 新產能（<strong>2027–2029 分批開出</strong>）、<span class='wikilink'>[[3711 日月光投控]]</span> 旗下矽品獲輝達數十億美元資金支持之大型先進封裝新廠（<strong>目標 2029 年中到位</strong>）全面開出。",
+          "<strong>② ⚠️ Gate 2/3 投資節奏與反方折舊警示</strong>：切勿把 2028–2029 的新廠產能當成 2026 當季營收過度追價！2026–2027 的核心獲利來自<strong>「缺貨漲價、毛利率地板上移與第一波外溢倍增」</strong>；到了 2028–2029 各大廠重金擴建的新廠全數投產後，必須嚴格檢視<strong>龐大折舊費用</strong>與<strong>供需是否由緊轉平</strong>。"
+        ]
+      }
+    ];
+
+    function selectPhase(idx, el) {
+      document.querySelectorAll('.phase-tab').forEach(t => t.classList.remove('active'));
+      if (el) el.classList.add('active');
+      const p = phases[idx];
+      document.getElementById('phaseContentBox').innerHTML = `
+        <div style="color:var(--accent-cyan); font-size:0.8rem; font-weight:800; margin-bottom:6px;">${p.badge}</div>
+        <h3 style="font-size:1.22rem; color:#fff; margin-bottom:14px;">${p.title}</h3>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          ${p.points.map(pt => `<div style="background:var(--bg-panel); border-left:3px solid var(--accent-cyan); padding:11px 15px; border-radius:8px; font-size:0.85rem; color:#e2e8f0; line-height:1.58;">${pt}</div>`).join('')}
+        </div>
+      `;
+    }
+    selectPhase(0);
+
+    // ==================== SLIDE 5: STRESS TEST SIMULATOR (1:1 FROM STAGE 2 SPEC) ====================
+    const stressScenarios = [
+      {
+        trigger: "<span class='ev-guide'>[官方指引]</span> Rubin 世代邁向 100% 無風扇全液冷機櫃，對微通道水冷板焊接與快接頭（UQD）氦氣測漏要求極為嚴苛。若二線供應商發生漏液事故或驗證卡關，導致整機櫃延遲交機：",
+        vulnerable: "<strong>下游整機櫃 ODM（[[2317 鴻海]]、[[2382 廣達]]）與二線新進散熱廠</strong><br><br>面臨機櫃半成品堆貨、存貨週轉天數上升與客戶驗收遞延之短期帳面營收衝擊（屬於 <span class='tag tag-time'>⚡ 短期情緒與交期擾動</span>），二線散熱廠更將直接失去客戶信任。",
+        resilient: "<strong>一線已通過嚴苛零漏液驗證之散熱龍頭（[[3017 奇鋐]]）</strong><br><br>漏液事故將使 CSP 與輝達不敢採用低價二線廠，零漏液製造壁壘反而成為淘汰殺價競爭者的最強護城河，促使訂單與份額進一步向奇鋐集中（<span class='ev-fact'>[財報實績]</span> 毛利率已達 33.86% 高標）。"
+      },
+      {
+        trigger: "<span class='ev-fact'>[財報實績]</span> 2026 年四大 CSP 高達 7,300~7,400 億美元的資本支出帶來龐大折舊壓力。若 CSP 為保自由現金流，大幅砍減高溢價通用 GPU 訂單，將預算全面轉向低成本自研 <span class='wikilink'>[[AI ASIC]]</span>：",
+        vulnerable: "<strong>純輝達 GPU 獨供鏈 / 高度依賴單一客戶之零組件廠</strong><br><br>面臨估值修正與砍單雜音，<span class='wikilink'>[[NVDA 輝達]]</span> 在推論市場的高毛利與定價權將受到客戶自研晶片制衡。",
+        resilient: "<strong>「GPU + ASIC 雙引擎通吃」之核心節點</strong><br><br>• <span class='wikilink'>[[2330 台積電]]</span>：不論 GPU 或 ASIC 皆 100% 用其 3nm/2nm 與 <span class='wikilink'>[[CoWoS]]</span>。<br>• <span class='wikilink'>[[AVGO 博通]]</span>：CSP 自研 ASIC 最大設計贏家（<span class='ev-est'>[預估]</span> 2027 ASIC 出貨追平 GPU）。<br>• <span class='wikilink'>[[3017 奇鋐]]</span>：<span class='ev-guide'>[官方指引]</span> 2027 年 ASIC 散熱營收本就預計正式超越 GPU。<br>• <span class='wikilink'>[[3711 日月光投控]]</span>：承接大量 CSP ASIC 先進封裝（FOCoS / LEAP）外溢訂單。"
+      },
+      {
+        trigger: "大面積 Chiplet 封裝使高層數 ABF 載板消耗倍增，若上游日系 T-Glass 高階玻纖布擴產過於保守，或 CoWoS 關鍵濕製程/點膠設備交期延誤：",
+        vulnerable: "<strong>未簽署長約鎖料之二線晶片/載板廠與下游系統組裝廠</strong><br><br>因缺載板或缺上游玻纖布材料而無法完成封裝交貨，面臨「有訂單卻出不了貨」及原材料漲價侵蝕毛利的雙重打擊。",
+        resilient: "<strong>已獲輝達/CSP 數十億美元長約固樁並鎖定材料配額之大廠（[[3189 景碩]]、[[3037 欣興]]）</strong><br><br>優先獲得上游 T-Glass 配額，且供需缺口將直接推動高階 ABF 載板啟動漲價循環，使景碩毛利率穩站 <span class='ev-est'>[法人/研調預估]</span> <strong>34%~34.5%</strong> 甚至超預期。"
+      }
+    ];
+
+    function selectStress(idx, btn) {
+      if (btn) {
+        btn.parentElement.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      }
+      const s = stressScenarios[idx];
+      document.getElementById('stressCards').innerHTML = `
+        <div class="card" style="border-top: 4px solid var(--watch-amber);">
+          <div style="font-size:0.76rem; color:var(--watch-amber); font-weight:800; margin-bottom:8px;">⚡ 壓力觸發機制 (Trigger Mechanism)</div>
+          <h3 style="font-size:1.05rem; color:#fff; margin-bottom:10px;">情境假設與傳導起點</h3>
+          <p style="font-size:0.84rem; color:#e2e8f0; line-height:1.6;">${s.trigger}</p>
+        </div>
+        <div class="card" style="border-top: 4px solid var(--bear-red);">
+          <div style="font-size:0.76rem; color:var(--bear-red); font-weight:800; margin-bottom:8px;">🔴 最脆弱 / 首當其衝環節 (Most Vulnerable)</div>
+          <h3 style="font-size:1.05rem; color:#fff; margin-bottom:10px;">誰會先受傷？</h3>
+          <p style="font-size:0.84rem; color:#e2e8f0; line-height:1.6;">${s.vulnerable}</p>
+        </div>
+        <div class="card" style="border-top: 4px solid var(--bull-green);">
+          <div style="font-size:0.76rem; color:var(--bull-green); font-weight:800; margin-bottom:8px;">🟢 最具韌性 / 反受惠避風港 (Anti-Fragile Winners)</div>
+          <h3 style="font-size:1.05rem; color:#fff; margin-bottom:10px;">誰能抗跌甚至反受惠？</h3>
+          <p style="font-size:0.84rem; color:#e2e8f0; line-height:1.6;">${s.resilient}</p>
+        </div>
+      `;
+    }
+    selectStress(0);
+
+    // ==================== SLIDE 6: WATCHLIST TABLE FILTER ====================
+    function filterTable(tier, btn) {
+      btn.parentElement.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('#watchlistTable tbody tr').forEach(row => {
+        if (tier === 'all' || row.dataset.tier === tier) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>
