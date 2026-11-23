@@ -1,7 +1,12 @@
 # 🌐 美台科技與 AI 供應鏈事件傳導知識庫 (LLM Wiki) & 教學型 HTML 簡報
 
 > **作業主題**：用 LLM Wiki 做一份教學 HTML 簡報  
-> **知識庫領域**：美股與台股科技 / AI 硬體供應鏈之一階與二階事件傳導推演（Event Transmission & Supply Chain Mapping）
+> **知識庫領域**：美股與台股科技 / AI 硬體供應鏈之一階與二階事件傳導推演（Event Transmission & Supply Chain Mapping）  
+> **GitHub 儲存庫**：https://github.com/TW-Aki/TAICA_week10_2_hw  
+> **🖥️ 教學 HTML 簡報線上直接瀏覽（免下載即開即看）**：  
+> - **GitHub Pages 連結**：https://tw-aki.github.io/TAICA_week10_2_hw/  
+> - **HTML Preview 備用直連**：https://htmlpreview.github.io/?https://github.com/TW-Aki/TAICA_week10_2_hw/blob/main/index.html  
+> - **簡報原始碼檔案**：[`AI供應鏈實質影響分析簡報.html`](https://github.com/TW-Aki/TAICA_week10_2_hw/blob/main/AI%E4%BE%9B%E6%87%89%E9%8F%88%E5%AF%A6%E8%B3%AA%E5%BD%B1%E9%9F%BF%E5%88%86%E6%9E%90%E7%B0%A1%E5%A0%B1.html) / [`index.html`](https://github.com/TW-Aki/TAICA_week10_2_hw/blob/main/index.html)
 
 ---
 
